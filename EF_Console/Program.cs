@@ -4,9 +4,8 @@ using EF_DAL.Entities;
 HolidayContext context = new();
 
 //// SELECT * FROM Hotels WHERE Address LIKE 'Char%'
-//List<Hotel> hotels = context.Hotels
-//    .Where(ht => ht.Address.StartsWith("Char"))
-//    .ToList();
+IEnumerable<Hotel> hotels = context.Hotels
+    .Where(ht => ht.Address.StartsWith("Char"));
 
 //List<Hotel> hotels2 = (
 //    from h in hotels
@@ -14,10 +13,10 @@ HolidayContext context = new();
 //    select h
 //).ToList();
 
-//foreach (Hotel hotel in hotels)
-//{
-//    Console.WriteLine($"{hotel.Nom}");
-//}
+foreach (Hotel hotel in hotels.ToList())
+{
+    Console.WriteLine($"{hotel.Nom}");
+}
 
 Hotel h = new Hotel();
 h.Nom = "Novotel";
@@ -29,5 +28,11 @@ h.Fax = "+3271123456";
 
 context.Hotels.Add(h);
 context.SaveChanges();
+
+foreach (Hotel hotel in hotels.ToList())
+{
+    Console.WriteLine($"{hotel.Nom}");
+}
+
 
 
