@@ -1,37 +1,33 @@
 ﻿using EF_DAL;
 using EF_DAL.Entities;
 
-HolidayContext context = new HolidayContext();
+HolidayContext context = new();
 
-// SELECT * FROM Hotels
-List<Hotel> h = context.Hotels.ToList();
+//// SELECT * FROM Hotels WHERE Address LIKE 'Char%'
+//List<Hotel> hotels = context.Hotels
+//    .Where(ht => ht.Address.StartsWith("Char"))
+//    .ToList();
 
-foreach (Hotel hotel in h)
-{
-    Console.WriteLine($"{hotel.Nom}");
-}
+//List<Hotel> hotels2 = (
+//    from h in hotels
+//    where h.Address.StartsWith("Char")
+//    select h
+//).ToList();
 
-List<int> Filtrer(List<int> nbs, Func<int, bool> cond)
-{
-    List<int> result = new List<int>();
-    foreach (int nb in nbs)
-    {
-        if (cond(nb))
-        {
-            result.Add(nb);
-        }
-    }
-    return result;
-}
+//foreach (Hotel hotel in hotels)
+//{
+//    Console.WriteLine($"{hotel.Nom}");
+//}
 
-List<int> nbs = new List<int>() { 1, 2, 3, 4, 42, 99, 85 };
+Hotel h = new Hotel();
+h.Nom = "Novotel";
+h.Piscine = false;
+h.Address = "Charleroi";
+h.DateDeCreation = DateTime.Now;
+h.NbEtoiles = 3;
+h.Fax = "+3271123456";
 
-bool EstPair(int nb)
-{
-    return nb % 2 == 0;
-}
-
-List<int> nbs2 = nbs.Where(nb => nb % 3 == 0).ToList();
-Console.WriteLine(string.Join(",", nbs2.Select(x => x.ToString())));
+context.Hotels.Add(h);
+context.SaveChanges();
 
 
