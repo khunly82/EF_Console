@@ -4,6 +4,7 @@ using EF_DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EF_DAL.Migrations
 {
     [DbContext(typeof(HolidayContext))]
-    partial class HolidayContextModelSnapshot : ModelSnapshot
+    [Migration("20240201133100_TableReservations")]
+    partial class TableReservations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,26 +103,6 @@ namespace EF_DAL.Migrations
                     b.HasIndex("HotelId");
 
                     b.ToTable("Bookings");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("10b4b347-6b98-457e-b6f6-347a4d2274a3"),
-                            DateArrivee = new DateTime(2024, 2, 2, 14, 50, 39, 87, DateTimeKind.Local).AddTicks(8995),
-                            DateDeReservation = new DateTime(2024, 2, 1, 14, 50, 39, 87, DateTimeKind.Local).AddTicks(9031),
-                            DateDepart = new DateTime(2024, 2, 9, 14, 50, 39, 87, DateTimeKind.Local).AddTicks(9029),
-                            HotelId = 1,
-                            Prix = 150.42m
-                        },
-                        new
-                        {
-                            Id = new Guid("eacabc34-084c-4196-9461-0ffa87130445"),
-                            DateArrivee = new DateTime(2024, 1, 27, 14, 50, 39, 87, DateTimeKind.Local).AddTicks(9042),
-                            DateDeReservation = new DateTime(2024, 1, 25, 14, 50, 39, 87, DateTimeKind.Local).AddTicks(9045),
-                            DateDepart = new DateTime(2024, 1, 28, 14, 50, 39, 87, DateTimeKind.Local).AddTicks(9044),
-                            HotelId = 1,
-                            Prix = 61m
-                        });
                 });
 
             modelBuilder.Entity("EF_DAL.Entities.Reservation", b =>

@@ -36,6 +36,25 @@ namespace EF_DAL
                     Piscine = true
                 }
             });
+            modelBuilder.Entity<Reservation>().HasData(new List<Reservation>
+            {
+                new Reservation { 
+                    Id = Guid.NewGuid(),
+                    DateArrivee = DateTime.Now.AddDays(1),
+                    DateDepart = DateTime.Now.AddDays(8),
+                    DateDeReservation = DateTime.Now,
+                    Prix = 150.42m,
+                    HotelId = 1
+                },
+                new Reservation {
+                    Id = Guid.NewGuid(),
+                    DateArrivee = DateTime.Now.AddDays(-5),
+                    DateDepart = DateTime.Now.AddDays(-4),
+                    DateDeReservation = DateTime.Now.AddDays(-7),
+                    Prix = 61m,
+                    HotelId = 1
+                },
+            });
         }
     }
 }

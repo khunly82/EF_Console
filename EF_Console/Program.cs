@@ -1,38 +1,14 @@
 ﻿using EF_DAL;
 using EF_DAL.Entities;
+using Microsoft.EntityFrameworkCore;
 
 HolidayContext context = new();
 
-//// SELECT * FROM Hotels WHERE Address LIKE 'Char%'
-IEnumerable<Hotel> hotels = context.Hotels
-    .Where(ht => ht.Address.StartsWith("Char"));
+List<Hotel> hotelList = context.Hotels
+    .Include(h => h.Reservations).ToList();
 
-//List<Hotel> hotels2 = (
-//    from h in hotels
-//    where h.Address.StartsWith("Char")
-//    select h
-//).ToList();
-
-foreach (Hotel hotel in hotels.ToList())
+foreach (Hotel hotel in hotelList)
 {
     Console.WriteLine($"{hotel.Nom}");
+    Console.WriteLine(hotel.Reservations.Count);
 }
-
-Hotel h = new Hotel();
-h.Nom = "Novotel";
-h.Piscine = false;
-h.Address = "Charleroi";
-h.DateDeCreation = DateTime.Now;
-h.NbEtoiles = 3;
-h.Fax = "+3271123456";
-
-context.Hotels.Add(h);
-context.SaveChanges();
-
-foreach (Hotel hotel in hotels.ToList())
-{
-    Console.WriteLine($"{hotel.Nom}");
-}
-
-
-
